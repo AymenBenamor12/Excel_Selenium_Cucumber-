@@ -2,6 +2,7 @@ package com.e2eTests.automation.pageObjects;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,13 +13,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.Test;
 
 import com.e2eTests.automation.utils.CommondMethods;
 import com.e2eTests.automation.utils.Setup;
 
-public class FormulairePageObejects extends CommondMethods  {
 
-/*Locators*/
+import utilities.Constants;
+import utilities.ExcelUtils;
+
+public class FormulairePageObejects extends CommondMethods  {
+	
+	
+	
+	 
+	// calling the ExcelUtils class method to initialise the workbook and sheet
+	 ParametrePageObjects ParametrePageObjects = new ParametrePageObjects();
+   
+	// creating object of ExcelUtils class
+	    public final static ExcelUtils excelUtils = new ExcelUtils();
+
+	    // using the Constants class values for excel file path
+	    public static String excelFilePath = Constants.Path_TestData + Constants.File_TestData;
+    
+    /*Locators*/
 	
 	final static String FIRSTNAME_ID = "firstName";
 	final static String LASTTNAME_ID = "lastName";
@@ -56,64 +74,65 @@ public class FormulairePageObejects extends CommondMethods  {
 	public static WebElement confirmationMessage;
 	
 	@FindBy(how = How.ID, using= CLOSEBTN_ID)
-	public static WebElement closeBtn;
+	public static WebElement closeBtn ;
 	
 	
 	/*Methods*/
-	public static void firstNameMethode(String name) {
-		firstName.sendKeys(name);
-}
-	public static void lastNameMethode(String namelast) {
-		lastName.sendKeys(namelast);
-}
-	public static void emailMethode(String mail) {
-		email.sendKeys(mail);
-}
-	public static void numberMethode(String numero) {
-		number.sendKeys(numero);
-}
-	public static void adressMethode(String cureentadress) {
-		adress.sendKeys(cureentadress);
-}
-	public static void genderMethode() {
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
-         js.executeScript("arguments[0].click();", genderr);
-}
-	public static void sumbitMethode() {
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", submit);
-}
-	public static void messageMethode() {
-		 if (confirmationMessage.isDisplayed()) {
-             // if the message is displayed , write PASS in the excel sheet
-             System.out.println("PASS");
-             
-         } else {
-             //if the message is not displayed , write FAIL in the excel sheet
-        	 System.out.println("FAIL");
-         }
+	  public static void excelMethode(String args[]) throws IOException
+	    {
+	    
+
+	        // calling the ExcelUtils class method to initialise the workbook and sheet
+	        excelUtils.setExcelFile(excelFilePath, "STUDENT_DATA");
+
+	        // iterate over all the row to print the data present in each cell.
+	        for (int i1 = 1; i1 <= excelUtils.getRowCountInSheet(); i1++)
+	        {
+	            // Enter the values read from Excel in firstname,lastname,mobile,email,address
+	        	 firstName.sendKeys(excelUtils.getCellData(i1, 0));
+	            lastName.sendKeys(excelUtils.getCellData(i1, 1));
+	            email.sendKeys(excelUtils.getCellData(i1, 2));
+	            number.sendKeys(excelUtils.getCellData(i1, 3));
+	            adress.sendKeys(excelUtils.getCellData(i1, 4));
+	       	 if (confirmationMessage.isDisplayed()) {
+	             // if the message is displayed , write PASS in the excel sheet
+	   			 ExcelUtils.setCellValue(i1, 6, "PASS", excelFilePath);
+	             
+	         } else {
+	             //if the message is not displayed , write FAIL in the excel sheet
+	       	   ExcelUtils.setCellValue(i1, 6, "FAIL", excelFilePath);
+	         }
+	   	}
+
+	        
+	    }
+	
+		public static void genderMethode() {
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+	         js.executeScript("arguments[0].click();", genderr);
 	}
-	public static void closeMethode() {
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
-       js.executeScript("arguments[0].click();", closeBtn);
-}
-public static void scrennshot( String screenShot1) {
+		public static void sumbitMethode() {
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("arguments[0].click();", submit);
+	
+	}
+		public static void messageMethode() {
+			 if (confirmationMessage.isDisplayed()) {
+	             // if the message is displayed , write PASS in the excel sheet
+	             System.out.println("PASS");
+	             
+	         } else {
+	             //if the message is not displayed , write FAIL in the excel sheet
+	        	 System.out.println("FAIL");
+	         }
+		}
+		public static void closeMethode() {
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
+	       js.executeScript("arguments[0].click();", closeBtn);
+	}
 		
-		TakesScreenshot screenshot= (TakesScreenshot) driver;
-    File screenshotFile = screenshot.getScreenshotAs(OutputType.FILE);
-
-    //String destinationPath = "C:\\Users\\AYMEN\\Desktop\\excelProjet.screenshot.png";
-
-    File destinationFile = new File("C:\\Users\\AYMEN\\Desktop\\screen shot\\"+screenShot1+".png");
-    
-    		try {
-        FileUtils.copyFile(screenshotFile, destinationFile);
-        System.out.println("Capture d'écran effectuée avec succès. Chemin du fichier : " + destinationFile.getAbsolutePath());
-    } catch (IOException e) {
-        System.out.println("Erreur lors de l'enregistrement du screenshot : " + e.getMessage());
-    }
+	
+	
+	
 }
-	public static  void ecriremessage(String done) {
-		System.out.println("Le Scenario est "+done);
-	}
-}
+

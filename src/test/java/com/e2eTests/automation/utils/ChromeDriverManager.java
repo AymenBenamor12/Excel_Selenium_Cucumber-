@@ -23,7 +23,7 @@ public class ChromeDriverManager extends DriverManager {
                     //.usingDriverExecutable(new File("src/test/resources/drivers/chromedriver.exe"))
                     //.usingAnyFreePort()
                     //.build();
-                chService.start();
+                //chService.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -22,11 +22,11 @@ public class CommondMethods {
 	}
 	
 	protected static final Logger logger = LoggerFactory.getLogger(AbstractPage.class);
-	public void openURLWithConfigFile(String url1) throws IOException {
+	public void openURLWithConfigFile(String url) throws IOException {
 		prop = new Properties();
 		FileInputStream fis = new FileInputStream("src/test/resources/configs/config.properties");
 		prop.load(fis);
-		driver.get(prop.getProperty(url1));
+		driver.get(prop.getProperty(url));
 
 	}
 }

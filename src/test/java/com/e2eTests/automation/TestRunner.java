@@ -15,7 +15,7 @@ import cucumber.api.junit.Cucumber;
 		features = {"src/specs/features"},
 		//glue = {""}, //step definition
 		plugin = {"pretty", "html:target/cucumber-html-report", "json:target/cucumber.json", "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/Orange.html"},
-		tags = {("@Formulaire")},
+		tags = {("@Formulaire23")},
 		snippets = SnippetType.CAMELCASE,
 		monochrome = true
 		)
