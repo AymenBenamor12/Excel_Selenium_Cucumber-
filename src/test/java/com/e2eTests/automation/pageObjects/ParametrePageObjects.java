@@ -8,10 +8,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import com.e2eTests.automation.utils.CommondMethods;
+import com.e2eTests.automation.utils.ExcelUtils;
 
-import utilities.ExcelUtils;
-
-public class ParametrePageObjects extends FormulairePageObejects{
+public class ParametrePageObjects extends CommondMethods {
 	
 	
 

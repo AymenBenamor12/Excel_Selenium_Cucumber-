@@ -1,8 +1,12 @@
-package utilities;
+package com.e2eTests.automation.utils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,13 +15,13 @@ import java.io.IOException;
 
 public class ExcelUtils
 {
-    private static HSSFWorkbook workbook;
+    private static XSSFWorkbook workbook;
 
-    private static HSSFSheet sheet;
+    private static XSSFSheet sheet;
 
-    private static HSSFRow row;
+    private static XSSFRow row;
 
-    private static HSSFCell cell;
+    private static XSSFCell cell;
 
     public void setExcelFile(String excelFilePath, String sheetName) throws IOException
     {
@@ -28,7 +32,7 @@ public class ExcelUtils
         FileInputStream inputStream = new FileInputStream(file);
 
         // creating workbook instance that refers to .xls file
-        workbook = new HSSFWorkbook(inputStream);
+        workbook = new XSSFWorkbook(inputStream);
 
         // creating a Sheet object
         sheet = workbook.getSheet(sheetName);

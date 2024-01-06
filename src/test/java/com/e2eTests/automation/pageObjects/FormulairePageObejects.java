@@ -16,11 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
 import com.e2eTests.automation.utils.CommondMethods;
+import com.e2eTests.automation.utils.Constants;
+import com.e2eTests.automation.utils.ExcelUtils;
 import com.e2eTests.automation.utils.Setup;
-
-
-import utilities.Constants;
-import utilities.ExcelUtils;
 
 public class FormulairePageObejects extends CommondMethods  {
 	

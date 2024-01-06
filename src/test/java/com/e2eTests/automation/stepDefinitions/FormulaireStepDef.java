@@ -46,7 +46,7 @@ public void faire_une_screenshotuser(String screenshot) throws Throwable {
 
 @When("^je click  sur le bouton submit$")
 public void je_click_sur_le_bouton_submit() throws Throwable {
-	parametrePageObjects.sumbitMethode();
+	formulairePageObejects.sumbitMethode();
 }
 
 @Then("^je obtient un message de confirmation$")
